@@ -15,6 +15,8 @@ builder.Services.AddScoped<IPlatformRepository, PlatformRepository>();
 
 builder.Services.AddControllers();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -28,5 +30,5 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 PrepDb.PrepPopulation(app);
-
+ 
 app.Run();
