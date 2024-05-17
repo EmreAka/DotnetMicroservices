@@ -11,6 +11,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseInMemoryDatabase("PlatformServiceInMemory");
 });
 
+builder.Services.AddScoped<IPlatformRepository, PlatformRepository>();
+
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -21,6 +25,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", () => "Hello World!");
+app.MapControllers();
+
+PrepDb.PrepPopulation(app);
 
 app.Run();
