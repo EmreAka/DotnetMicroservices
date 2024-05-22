@@ -23,6 +23,11 @@ spec:
         env:
         - name: "CommandService"
           value: "http://command-service-cluster-ip-service:8080"
+        - name: "ConnectionStrings__MSSQL"
+          valueFrom:
+            secretKeyRef:
+              name: mssql-ext
+              key: CONNECTION_STRING
 ---
 apiVersion: v1
 kind: Service

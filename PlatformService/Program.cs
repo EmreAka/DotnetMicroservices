@@ -9,7 +9,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseInMemoryDatabase("PlatformServiceInMemory");
+    var connectionString = builder.Configuration.GetConnectionString("MSSQL");
+    options.UseSqlServer(connectionString);
 });
 
 builder.Services.AddScoped<IPlatformRepository, PlatformRepository>();
@@ -33,5 +34,5 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 PrepDb.PrepPopulation(app);
- 
+
 app.Run();
